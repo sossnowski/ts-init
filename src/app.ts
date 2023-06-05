@@ -1,21 +1,22 @@
-import express, {Express}  from 'express';
-import rateLimit  from 'express-rate-limit';
+import express from 'express';
+import rateLimit from 'express-rate-limit';
 import compression from 'compression';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
+
 dotenv.config({
-    path:
-      process.env.NODE_ENV === 'test' ? `.env.${process.env.NODE_ENV}` : '.env',
-  })
+  path:
+    process.env.NODE_ENV === 'test' ? `.env.${process.env.NODE_ENV}` : '.env',
+});
 
-                        const app: Express = express();
-  app.use(compression());
+const app = express();
+app.use(compression());
 
-  const limiter = rateLimit({
-    windowMs: 1 * 1000, // ms
-    max: 100, // limit each IP to 100 requests per windowMs
-  });
+const limiter = rateLimit({
+  windowMs: 1 * 1000, // ms
+  max: 100, // limit each IP to 100 requests per windowMs
+});
 
-  app.use(limiter);
+app.use(limiter);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: '50mb' }));
 
