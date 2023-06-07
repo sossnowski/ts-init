@@ -10,7 +10,14 @@
     "build": "tsc",
     "preproduction": "eslint src --max-warnings 0 && tsc",
     "production": "node dist/index.js",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "npm run lint",
+      "prettier --write"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -28,6 +35,8 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.2.2",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.8",
     "ts-node": "^10.9.1",
